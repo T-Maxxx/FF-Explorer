@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "ffexplorer-mfc.h"
+#include "FFExplorerApp.h"
 #include "DlgOptions.h"
 #include "Localization.h"
 #include "afxdialogex.h"
@@ -10,10 +10,10 @@
 
 // CDlgOptions dialog
 
-IMPLEMENT_DYNAMIC(CDlgOptions, CDialogEx)
+IMPLEMENT_DYNAMIC(CDlgOptions, CLocalizableDialog)
 
 CDlgOptions::CDlgOptions(CWnd* pParent /*=NULL*/)
-	: CDialogEx(IDD_DLGOPTIONS, pParent)
+	: CLocalizableDialog(IDD_DLGOPTIONS, pParent)
 {
 
 }
@@ -23,27 +23,24 @@ CDlgOptions::~CDlgOptions()
 }
 
 
-BEGIN_MESSAGE_MAP(CDlgOptions, CDialogEx)
+BEGIN_MESSAGE_MAP(CDlgOptions, CLocalizableDialog)
+    ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 
 BOOL CDlgOptions::OnInitDialog()
 {
-    CDialogEx::OnInitDialog();
-
     m_cbLanguage.SubclassDlgItem(IDC_CB_LANGUAGE, this);
-    localizeDialog();
     m_cbLanguage.SetCurSel(0);
 
-    return TRUE;  // return TRUE unless you set the focus to a control
-                  // EXCEPTION: OCX Property Pages should return FALSE
+    return CLocalizableDialog::OnInitDialog();
 }
 
 void CDlgOptions::OnClose()
 {
 }
 
-void CDlgOptions::localizeDialog()
+void CDlgOptions::LocalizeDialog()
 {
     CLocalization* pLoc = CLocalization::GetInstance();
     // Language:
@@ -53,8 +50,16 @@ void CDlgOptions::localizeDialog()
         const int langIdx = m_cbLanguage.AddString(pLoc->GetLanguageName(i));
         m_cbLanguage.SetItemData(langIdx, i);
     }
-    
+
     // Control buttons:
-    SetDlgItemText(IDOK,        L(IDS_APPLY));
-    SetDlgItemText(IDCANCEL,    L(IDS_CANCEL));
+    SetDlgItemText(IDOK, L(IDS_APPLY));
+    SetDlgItemText(IDCANCEL, L(IDS_CANCEL));
+}
+
+void CDlgOptions::OnSize(UINT nType, int cx, int cy)
+{
+    if (!IsDialogInitialized())
+        return;
+
+    CLocalizableDialog::OnSize(nType, cx, cy);
 }

@@ -22,3 +22,8 @@ int CTaskDecompression::RunTask()
     Sleep(1000);
     return 0;
 }
+
+int CTaskDecompression::DiscardChanges()
+{
+    return 0;
+}

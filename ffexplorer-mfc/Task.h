@@ -7,16 +7,17 @@ public:
     virtual ~CTask();
 
     virtual int RunTask() = 0;
+    virtual int DiscardChanges() = 0;
     void SetNotifyWindow(const HWND& Window_);
-    void GetError(CString& Out_);
+    UINT GetError() const;
 
 
 protected: 
-    void setError(const CString& Error_);
+    void setError(UINT StrErrorIdx_);
     void ReportProgress(unsigned int Value_);
 
 private:
-    CString m_LastError;
+    UINT m_LastError;
     HWND m_NotifyWindow;
 };
 

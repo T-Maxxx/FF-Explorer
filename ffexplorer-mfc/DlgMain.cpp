@@ -3,45 +3,33 @@
 //
 
 #include "stdafx.h"
-#include "ffexplorer-mfc.h"
+#include "FFExplorerApp.h"
 #include "DlgMain.h"
 #include "afxdialogex.h"
 #include "DlgOptions.h"
 #include "DlgLoading.h"
 #include "TaskDecompression.h"
 #include "Localization.h"
+#include <vector>
+
+using namespace std;
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 CDlgMain::CDlgMain(CWnd* pParent /*=NULL*/)
-    : CDialogEx(IDD_FFEXPLORERMFC_DIALOG, pParent)
+    : CLocalizableDialog(IDD_FFEXPLORERMFC_DIALOG, pParent)
 {
     m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
-void CDlgMain::localizeDialog()
-{
-    this->SetWindowText(L(IDS_FFEXPLORER));
-}
-
-void CDlgMain::localizeMenu()
-{
-    CLocalization::TDictionary dict;
-    dict[L"IDS_FILE"] = IDS_FILE;
-    dict[L"IDS_OPEN"] = IDS_OPEN;
-    dict[L"IDS_OPTIONS"] = IDS_OPTIONS;
-    dict[L"IDS_QUIT"] = IDS_QUIT;
-    CLocalization::GetInstance()->LocalizeMenu(GetMenu(), dict);
-}
-
 void CDlgMain::DoDataExchange(CDataExchange* pDX)
 {
-    CDialogEx::DoDataExchange(pDX);
+    CLocalizableDialog::DoDataExchange(pDX);
 }
 
-BEGIN_MESSAGE_MAP(CDlgMain, CDialogEx)
+BEGIN_MESSAGE_MAP(CDlgMain, CLocalizableDialog)
     ON_WM_PAINT()
     ON_WM_QUERYDRAGICON()
     ON_COMMAND(IDC_MENU_FILE_OPTIONS, &CDlgMain::OnMenuFileOptions)
@@ -52,20 +40,39 @@ END_MESSAGE_MAP()
 
 // CDlgMain message handlers
 
+void CDlgMain::OnSize(UINT nType, int cx, int cy)
+{
+    if (!IsDialogInitialized())
+        return;
+
+    CLocalizableDialog::OnSize(nType, cx, cy);
+}
+
 BOOL CDlgMain::OnInitDialog()
 {
-    CDialogEx::OnInitDialog();
+    CLocalizableDialog::OnInitDialog();
 
     // Set the icon for this dialog.  The framework does this automatically
     //  when the application's main window is not a dialog
     SetIcon(m_hIcon, TRUE);			// Set big icon
     SetIcon(m_hIcon, FALSE);		// Set small icon
 
-    // TODO: Add extra initialization here
-    localizeMenu();
-    localizeDialog();
-
     return TRUE;  // return TRUE  unless you set the focus to a control
+}
+
+void CDlgMain::LocalizeDialog()
+{
+    this->SetWindowText(L(IDS_FFEXPLORER));
+}
+
+void CDlgMain::LocalizeMenu()
+{
+    CLocalization::TDictionary dict;
+    dict[L"IDS_FILE"] = IDS_FILE;
+    dict[L"IDS_OPEN"] = IDS_OPEN;
+    dict[L"IDS_OPTIONS"] = IDS_OPTIONS;
+    dict[L"IDS_QUIT"] = IDS_QUIT;
+    CLocalization::GetInstance()->LocalizeMenu(GetMenu(), dict);
 }
 
 // If you add a minimize button to your dialog, you will need the code below
@@ -93,7 +100,7 @@ void CDlgMain::OnPaint()
     }
     else
     {
-        CDialogEx::OnPaint();
+        CLocalizableDialog::OnPaint();
     }
 }
 
@@ -123,14 +130,16 @@ void CDlgMain::OnMenuFileQuit()
 
 void CDlgMain::OnMenuFileOpen()
 {
-    // TODO: localize filter
-    CFileDialog& dlgOpenFile = CFileDialog(TRUE, NULL, NULL, 6UL, L"Fastfile (*.ff)");
+    //L"Fastfile (*.ff)"
+    CFileDialog& dlgOpenFile = CFileDialog(TRUE, NULL, NULL, 6UL);
     if (dlgOpenFile.DoModal() != IDOK)
         return;
 
     CString& ffName = dlgOpenFile.GetFileName();
 
     CTaskDecompression taskDecompression;
-    CDlgLoading dlgLoading(&taskDecompression);
+    vector<CTask*> vTasks;
+    vTasks.push_back(&taskDecompression);
+    CDlgLoading dlgLoading(vTasks);
     dlgLoading.DoModal();
 }

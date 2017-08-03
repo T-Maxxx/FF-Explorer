@@ -13,52 +13,94 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\XZone">
+      <UniqueIdentifier>{88896fcd-3f9f-4c86-abec-a43e99135b13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\XZone">
+      <UniqueIdentifier>{964ac8b7-4ca5-44cf-af20-c7b9b16094cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Task">
+      <UniqueIdentifier>{ddcd265b-3f22-4739-9d1f-22365d4c0c92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Task">
+      <UniqueIdentifier>{5f3674f4-e401-4bab-9d77-e322f6f3860d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Assets">
+      <UniqueIdentifier>{a519f004-239a-427f-9ab5-548707f53ce8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Assets">
+      <UniqueIdentifier>{6b54d056-89a4-4482-aadb-72bb78e037b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GUI">
+      <UniqueIdentifier>{dbfdd38e-4d22-4f47-9dad-9535e2dedaa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GUI">
+      <UniqueIdentifier>{28f605c1-24c1-402e-b152-bf58ab6cbc70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ffexplorer-mfc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DlgMain.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DlgOptions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DlgLoading.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Localization.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TaskDecompression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WindowMessages.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Task.h">
+    <ClInclude Include="AppOptions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AppOptions.h">
+    <ClInclude Include="DlgLoading.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgMain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgOptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Localization.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="XZone.h">
+      <Filter>Header Files\XZone</Filter>
+    </ClInclude>
+    <ClInclude Include="XZoneLoader.h">
+      <Filter>Header Files\XZone</Filter>
+    </ClInclude>
+    <ClInclude Include="XZoneStorage.h">
+      <Filter>Header Files\XZone</Filter>
+    </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>Header Files\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="TaskDecompression.h">
+      <Filter>Header Files\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="XAsset.h">
+      <Filter>Header Files\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="CDynArray.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CZlib.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LocalizableDialog.h">
+      <Filter>Header Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="FFExplorerApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ffexplorer-mfc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DlgMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -74,13 +116,37 @@
     <ClCompile Include="Localization.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TaskDecompression.cpp">
+    <ClCompile Include="AppOptions.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="XZone.cpp">
+      <Filter>Source Files\XZone</Filter>
+    </ClCompile>
+    <ClCompile Include="XZoneLoader.cpp">
+      <Filter>Source Files\XZone</Filter>
+    </ClCompile>
+    <ClCompile Include="XZoneStorage.cpp">
+      <Filter>Source Files\XZone</Filter>
     </ClCompile>
     <ClCompile Include="Task.cpp">
+      <Filter>Source Files\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="TaskDecompression.cpp">
+      <Filter>Source Files\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="XAsset.cpp">
+      <Filter>Source Files\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="CDynArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AppOptions.cpp">
+    <ClCompile Include="CZlib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LocalizableDialog.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="FFExplorerApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

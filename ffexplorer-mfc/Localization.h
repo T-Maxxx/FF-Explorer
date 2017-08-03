@@ -2,6 +2,7 @@
 #include <vector>
 #include <map>
 
+// Return localized string for current localization.
 LPCTSTR L(UINT StrID_);
 
 class CLocalization

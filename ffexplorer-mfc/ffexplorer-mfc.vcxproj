@@ -23,6 +23,7 @@
     <RootNamespace>ffexplorermfc</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
     <Keyword>MFCProj</Keyword>
+    <ProjectName>FFExplorer</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -95,6 +96,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>lib\zlib1.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -143,6 +145,7 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>lib\zlib1.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -186,10 +189,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppOptions.h" />
+    <ClInclude Include="CDynArray.hpp" />
+    <ClInclude Include="CZlib.hpp" />
     <ClInclude Include="DlgLoading.h" />
     <ClInclude Include="DlgMain.h" />
     <ClInclude Include="DlgOptions.h" />
-    <ClInclude Include="ffexplorer-mfc.h" />
+    <ClInclude Include="FFExplorerApp.h" />
+    <ClInclude Include="LocalizableDialog.h" />
     <ClInclude Include="Localization.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -197,13 +203,20 @@
     <ClInclude Include="Task.h" />
     <ClInclude Include="TaskDecompression.h" />
     <ClInclude Include="WindowMessages.h" />
+    <ClInclude Include="XAsset.h" />
+    <ClInclude Include="XZone.h" />
+    <ClInclude Include="XZoneLoader.h" />
+    <ClInclude Include="XZoneStorage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AppOptions.cpp" />
+    <ClCompile Include="CDynArray.cpp" />
+    <ClCompile Include="CZlib.cpp" />
     <ClCompile Include="DlgLoading.cpp" />
     <ClCompile Include="DlgMain.cpp" />
     <ClCompile Include="DlgOptions.cpp" />
-    <ClCompile Include="ffexplorer-mfc.cpp" />
+    <ClCompile Include="FFExplorerApp.cpp" />
+    <ClCompile Include="LocalizableDialog.cpp" />
     <ClCompile Include="Localization.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -213,6 +226,10 @@
     </ClCompile>
     <ClCompile Include="Task.cpp" />
     <ClCompile Include="TaskDecompression.cpp" />
+    <ClCompile Include="XAsset.cpp" />
+    <ClCompile Include="XZone.cpp" />
+    <ClCompile Include="XZoneLoader.cpp" />
+    <ClCompile Include="XZoneStorage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ffexplorer-mfc.rc" />

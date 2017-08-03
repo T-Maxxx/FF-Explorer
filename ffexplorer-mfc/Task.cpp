@@ -5,7 +5,7 @@
 
 CTask::CTask()
 {
-    m_LastError.Empty();
+    m_LastError = 0;
     m_NotifyWindow = NULL;
 }
 
@@ -16,7 +16,6 @@ CTask::CTask(const HWND & Window_) : CTask()
 
 CTask::~CTask()
 {
-    m_LastError.Empty();
 }
 
 void CTask::SetNotifyWindow(const HWND& Window_)
@@ -24,14 +23,14 @@ void CTask::SetNotifyWindow(const HWND& Window_)
     m_NotifyWindow = Window_;
 }
 
-void CTask::GetError(CString & Out_)
+UINT CTask::GetError() const
 {
-    Out_ = m_LastError;
+    return m_LastError;
 }
 
-void CTask::setError(const CString & Error_)
+void CTask::setError(UINT StrErrorIdx_)
 {
-    m_LastError = Error_;
+    m_LastError = StrErrorIdx_;
 }
 
 void CTask::ReportProgress(unsigned int Value_)
