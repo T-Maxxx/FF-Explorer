@@ -41,6 +41,11 @@ void CAppOptions::SaveOptions()
 
     m_IsSaveRequired = false;
 }
+/*
+bool CAppOptions::IsSaveRequired() const
+{
+    return m_IsSaveRequired;
+}*/
 
 void CAppOptions::SetLocalization(LCID Loc_)
 {

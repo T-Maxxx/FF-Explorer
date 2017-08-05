@@ -12,6 +12,7 @@ public:
 
     void LoadOptions();
     void SaveOptions();
+    //bool IsSaveRequired() const;
 
     void SetLocalization(LCID Loc_);
     LCID GetLocalization() const;

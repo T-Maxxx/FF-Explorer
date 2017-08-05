@@ -26,4 +26,9 @@ public:
     afx_msg void OnMenuFileOptions();
     afx_msg void OnMenuFileQuit();
     afx_msg void OnMenuFileOpen();
+
+private:
+    // May be moved to CLocalizableDialog if needed in more than one menu.
+    CMenu m_Menu;
+    virtual void OnCancel();
 };

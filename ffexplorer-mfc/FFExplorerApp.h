@@ -10,6 +10,7 @@
 
 #include "resource.h"		// main symbols
 #include "AppOptions.h"
+#include "Localization.h"
 
 
 class CFFExplorerApp : public CWinApp
@@ -19,10 +20,14 @@ public:
 
     virtual BOOL InitInstance();
 
+    CAppOptions* GetAppOptions();
+    CLocalization* GetAppLocalization();
+
     DECLARE_MESSAGE_MAP()
 
 private:
     CAppOptions m_AppOptions;
+    CLocalization m_AppLocalization;
 };
 
 extern CFFExplorerApp theApp;

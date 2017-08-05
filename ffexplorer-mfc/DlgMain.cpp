@@ -52,6 +52,12 @@ BOOL CDlgMain::OnInitDialog()
 {
     CLocalizableDialog::OnInitDialog();
 
+    if (!GetMenu())
+    {
+        m_Menu.LoadMenu(IDR_MENU_MAIN);
+        SetMenu(&m_Menu);
+    }
+
     // Set the icon for this dialog.  The framework does this automatically
     //  when the application's main window is not a dialog
     SetIcon(m_hIcon, TRUE);			// Set big icon
@@ -72,7 +78,7 @@ void CDlgMain::LocalizeMenu()
     dict[L"IDS_OPEN"] = IDS_OPEN;
     dict[L"IDS_OPTIONS"] = IDS_OPTIONS;
     dict[L"IDS_QUIT"] = IDS_QUIT;
-    CLocalization::GetInstance()->LocalizeMenu(GetMenu(), dict);
+    GetAppLocalization()->LocalizeMenu(GetMenu(), dict);
 }
 
 // If you add a minimize button to your dialog, you will need the code below
@@ -116,10 +122,24 @@ HCURSOR CDlgMain::OnQueryDragIcon()
 void CDlgMain::OnMenuFileOptions()
 {
     CDlgOptions dlgOptions;
-    if (dlgOptions.DoModal() == IDOK)
-    {
-        AfxMessageBox(L"Preferences saved");
-    }
+    if (dlgOptions.DoModal() != IDOK)
+        return;
+
+    LocalizeDialog();
+
+    // Reload menu.
+    CMenu* oldMenu = GetMenu();
+    SetMenu(NULL);
+    DestroyMenu(oldMenu->GetSafeHmenu());
+    oldMenu->Detach();
+
+    m_Menu.LoadMenu(IDR_MENU_MAIN);
+    SetMenu(&m_Menu);
+    LocalizeMenu();
+    this->DrawMenuBar();
+
+    CString text = L(IDS_OPTIONS_SAVED); // Can not be saved during 2 call.
+    ::MessageBox(GetSafeHwnd(), text.GetString(), L(IDS_OPTIONS), MB_OK);
 }
 
 
@@ -142,4 +162,10 @@ void CDlgMain::OnMenuFileOpen()
     vTasks.push_back(&taskDecompression);
     CDlgLoading dlgLoading(vTasks);
     dlgLoading.DoModal();
+}
+
+
+void CDlgMain::OnCancel()
+{
+    CLocalizableDialog::OnOK();
 }

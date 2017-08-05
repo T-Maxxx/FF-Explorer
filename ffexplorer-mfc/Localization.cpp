@@ -4,22 +4,9 @@
 
 using namespace std;
 
-CLocalization g_Localization;
-
-CLocalization* CLocalization::GetInstance()
-{
-    return &g_Localization;
-}
-
-LPCTSTR L(UINT StrID_)
-{
-    return g_Localization.Localize(StrID_);
-}
-
 CLocalization::CLocalization()
 {
     loadLanguages();
-    m_CurrentLoc = m_Languages[0].Index;
 }
 
 CLocalization::~CLocalization()
@@ -34,7 +21,8 @@ UINT CLocalization::GetLocalizationCount() const
 
 LPCTSTR CLocalization::Localize(UINT StrIdx_)
 {
-    if (m_LastLoadedString.LoadString(nullptr, StrIdx_, LANGIDFROMLCID(m_CurrentLoc)) != TRUE)
+    LANGID langid = LANGIDFROMLCID(GetAppOptions()->GetLocalization());
+    if (m_LastLoadedString.LoadString(nullptr, StrIdx_, langid) != TRUE)
         m_LastLoadedString.Format(L"Unlocalized: %d", StrIdx_);
     return m_LastLoadedString.GetString();
 }
@@ -64,18 +52,27 @@ void CLocalization::LocalizeMenu(CMenu * pMenu_, const TDictionary& Dictionary_)
         if (it != Dictionary_.end())
             pMenu_->ModifyMenu(info.wID, MF_BYCOMMAND | MF_STRING, info.wID, Localize(it->second));
     }
+    
 }
 
-void CLocalization::SetLocalization(UINT LocalizationIdx_)
+LCID CLocalization::GetLCIDByIndex(UINT Idx_)
 {
-    assert(LocalizationIdx_ < GetLocalizationCount());
-    m_CurrentLoc = m_Languages[LocalizationIdx_].Index;
+    assert(Idx_ < m_Languages.size());
+    return m_Languages[Idx_].Index;
 }
 
-LPCTSTR CLocalization::GetLanguageName(UINT LocalizationIdx_)
+LPCTSTR CLocalization::GetLanguageNameByIdx(UINT Idx_)
 {
-    assert(LocalizationIdx_ < GetLocalizationCount());
-    return Localize(m_Languages[LocalizationIdx_].LocalizationIndex);
+    assert(Idx_ < m_Languages.size());
+    return Localize(m_Languages[Idx_].LanguageNameStrIdx);
+}
+
+int CLocalization::GetIndexForLCID(LCID LocalizationID_) const
+{
+    for (int i = 0; i < (int)m_Languages.size(); ++i)
+        if (m_Languages[i].Index == LocalizationID_)
+            return i;
+    return -1;
 }
 
 void CLocalization::loadLanguages()

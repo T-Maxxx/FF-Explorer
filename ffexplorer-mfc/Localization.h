@@ -2,41 +2,36 @@
 #include <vector>
 #include <map>
 
-// Return localized string for current localization.
-LPCTSTR L(UINT StrID_);
-
 class CLocalization
 {
 public:
     CLocalization();
     ~CLocalization();
 
-    UINT GetLocalizationCount() const;
     LPCTSTR Localize(UINT StrIdx_);
-    void SetLocalization(UINT LocalizationIdx_);
-    LPCTSTR GetLanguageName(UINT LocalizationIdx_);
+    UINT GetLocalizationCount() const;
+    LCID GetLCIDByIndex(UINT Idx_);
+    LPCTSTR GetLanguageNameByIdx(UINT Idx_);
+    int GetIndexForLCID(LCID LocalizationID_) const;
 
     typedef std::map<CString, UINT> TDictionary;
     void LocalizeMenu(CMenu* pMenu_, const TDictionary& Dictionary_);
 
-    static CLocalization* GetInstance();
-
-    
 private:
     struct SLanguageInfo;
-    void loadLanguages();
 
-    LCID m_CurrentLoc;
-    CString m_LastLoadedString;
+    void loadLanguages();
     std::vector<SLanguageInfo> m_Languages;
+
+    CString m_LastLoadedString;
 };
 
 struct CLocalization::SLanguageInfo
 {
-    SLanguageInfo() : Index(0), LocalizationIndex(0) {}
-    SLanguageInfo(const LCID Index_, const UINT LocalizationIndex_) :
-        Index(Index_), LocalizationIndex(LocalizationIndex_) {}
+    SLanguageInfo() : Index(0), LanguageNameStrIdx(0) {}
+    SLanguageInfo(const LCID Index_, const UINT LanguageNameStrIdx_) :
+        Index(Index_), LanguageNameStrIdx(LanguageNameStrIdx_) {}
 
     LCID Index;
-    UINT LocalizationIndex;
+    UINT LanguageNameStrIdx;
 };
