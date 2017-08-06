@@ -11,7 +11,7 @@ CTaskDecompression::~CTaskDecompression()
 {
 }
 
-int CTaskDecompression::RunTask()
+UINT CTaskDecompression::RunTask()
 {
     Sleep(1000);
     this->ReportProgress(33);
@@ -23,7 +23,7 @@ int CTaskDecompression::RunTask()
     return 0;
 }
 
-int CTaskDecompression::DiscardChanges()
+UINT CTaskDecompression::DiscardChanges()
 {
     return 0;
 }

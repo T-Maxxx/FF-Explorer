@@ -7,7 +7,7 @@ class CTaskDecompression : public CTask
 public:
     CTaskDecompression();
     ~CTaskDecompression();
-    virtual int RunTask();
-    virtual int DiscardChanges();
+    virtual UINT RunTask();
+    virtual UINT DiscardChanges();
 };
 

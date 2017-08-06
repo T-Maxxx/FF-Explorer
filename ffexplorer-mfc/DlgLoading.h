@@ -19,13 +19,14 @@ public:
 
 private:
     static UINT __cdecl workerFunc(LPVOID pParam);
+    static UINT discardChanges(CDlgLoading* self, long lastTaskIdx_);
+
     void setBarValue(CProgressCtrl& ProgressBar_, long Value_);
 
     CStatic m_TextBatch;
-    CStatic m_TextStep;
-    CProgressCtrl m_ProgressBatch;
     CProgressCtrl m_ProgressStep;
     HANDLE m_WorkerThread;
+    UINT m_TasksCount;
     std::vector<CTask*>& m_Tasks;
 protected:
     afx_msg LRESULT OnTasksBatchEnd(WPARAM wParam, LPARAM lParam);
@@ -35,9 +36,6 @@ public:
     afx_msg void OnSize(UINT nType, int cx, int cy);
 protected:
     afx_msg LRESULT OnNextTask(WPARAM wParam, LPARAM lParam);
-
-    // Happens when one of tasks just ended.
-    // wParam is index of task.
-    // lParam is return value.
     afx_msg LRESULT OnTaskEnd(WPARAM wParam, LPARAM lParam);
+    afx_msg LRESULT OnSetTasksCount(WPARAM wParam, LPARAM lParam);
 };

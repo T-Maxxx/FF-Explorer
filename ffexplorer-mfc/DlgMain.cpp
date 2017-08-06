@@ -150,8 +150,8 @@ void CDlgMain::OnMenuFileQuit()
 
 void CDlgMain::OnMenuFileOpen()
 {
-    //L"Fastfile (*.ff)"
-    CFileDialog& dlgOpenFile = CFileDialog(TRUE, NULL, NULL, 6UL);
+    //
+    CFileDialog& dlgOpenFile = CFileDialog(TRUE, L"ff", NULL, 6UL, L"Fastfile (*.ff)|*.ff||");
     if (dlgOpenFile.DoModal() != IDOK)
         return;
 

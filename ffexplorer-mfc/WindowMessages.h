@@ -8,5 +8,6 @@ enum ECustomWindowMessage : unsigned short int
     CWM_TASK_PROGRESS,
     CWM_TASK_END,
     CWM_TASKSBATCH_END,
+    CWM_TASKSBATCH_SET_COUNT,
     CWM_COUNT
 };
